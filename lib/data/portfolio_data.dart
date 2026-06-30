@@ -27,11 +27,10 @@ class Profile {
   static const String github = 'https://github.com/Keerthi-1104';
   static const String linkedIn = 'https://www.linkedin.com/in/keerthana-r-8bb6ba32b';
   static const String location = 'India';
-  /// Path used by the nav-bar "Resume" button. For Flutter Web, files in
-  /// `assets/` are served at this same relative URL — `flutter run/build web`
-  /// copies the asset to `build/web/assets/...` so the link works in dev and
-  /// after deployment alike.
-  static const String resumeUrl = 'assets/resume/Keerthana_R_Resume.pdf';
+  /// Public URL of the resume PDF. The file lives at `web/resume.pdf` so
+  /// Flutter copies it verbatim to `build/web/resume.pdf`, giving us the clean
+  /// shareable URL `<site>/resume.pdf` in dev and after deployment alike.
+  static const String resumeUrl = 'resume.pdf';
 }
 
 /// ───────────────────────── About ─────────────────────────

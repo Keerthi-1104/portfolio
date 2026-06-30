@@ -64,8 +64,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  assets:
-    - assets/resume/Keerthana_R_Resume.pdf
+  # Resume PDF is served directly from web/resume.pdf — not bundled as a Flutter
+  # asset, so it's reachable at a clean URL: <site>/resume.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
