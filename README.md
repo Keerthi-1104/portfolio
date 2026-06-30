@@ -5,6 +5,11 @@ theme, responsive (desktop / tablet / mobile), with smooth scroll navigation.
 
 Sections: **Hero · About · Skills · Work · Experience · Contact**
 
+## Live URLs
+
+- **Portfolio:** https://keerthi-1104.github.io/portfolio/
+- **Resume PDF:** https://keerthi-1104.github.io/portfolio/resume.pdf
+
 ## Run locally
 
 ```bash
