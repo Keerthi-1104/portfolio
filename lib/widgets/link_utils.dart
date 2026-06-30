@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Opens an external URL (or mailto:) in a new tab. Silently no-ops on empty.
+/// Opens an external URL (or mailto:) in a new tab. Relative paths (e.g.
+/// `assets/resume/...`) are resolved against the current page URL so they
+/// work both in `flutter run -d chrome` and after deployment. Silently
+/// no-ops on empty.
 Future<void> openLink(String url) async {
   if (url.isEmpty) return;
-  final uri = Uri.parse(url);
+  Uri uri = Uri.parse(url);
+  if (!uri.hasScheme) {
+    uri = Uri.base.resolveUri(uri);
+  }
   if (await canLaunchUrl(uri)) {
     await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
