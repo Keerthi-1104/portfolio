@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'gradient_text.dart';
 
-/// A numbered section header like "01. About Me" with a trailing divider line.
+/// A numbered section header like "01. About Me" with a trailing gradient line.
 class SectionHeader extends StatelessWidget {
   const SectionHeader({super.key, required this.number, required this.title});
 
@@ -11,27 +12,37 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 36),
+      padding: const EdgeInsets.only(bottom: 38),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('$number.', style: AppTheme.mono(size: 18)),
-          const SizedBox(width: 12),
+          GradientText(
+            '$number.',
+            style: AppTheme.mono(size: 20, weight: FontWeight.w600),
+          ),
+          const SizedBox(width: 14),
           Flexible(
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
+                fontSize: 27,
+                fontWeight: FontWeight.w800,
                 color: AppColors.heading,
               ),
             ),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 22),
           Expanded(
             child: Container(
-              height: 1,
-              color: AppColors.surfaceLight,
+              height: 1.5,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.accent.withValues(alpha: 0.5),
+                    AppColors.violet.withValues(alpha: 0.0),
+                  ],
+                ),
+              ),
             ),
           ),
         ],

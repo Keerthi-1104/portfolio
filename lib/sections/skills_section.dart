@@ -43,17 +43,23 @@ class _SkillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.surfaceLight),
-      ),
+      decoration: AppDecorations.glass(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(group.icon, color: AppColors.accent, size: 22),
+              Container(
+                padding: const EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    AppColors.accent.withValues(alpha: 0.16),
+                    AppColors.violet.withValues(alpha: 0.16),
+                  ]),
+                  borderRadius: BorderRadius.circular(9),
+                ),
+                child: Icon(group.icon, color: AppColors.accent, size: 20),
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(

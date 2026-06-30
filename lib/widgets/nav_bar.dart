@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../data/portfolio_data.dart';
 import '../theme/app_theme.dart';
 import 'link_utils.dart';
+import 'gradient_text.dart';
 
 class NavItem {
   final String label;
@@ -19,15 +21,21 @@ class TopNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isNarrow = MediaQuery.of(context).size.width < 820;
-    return Container(
-      height: 70,
-      decoration: BoxDecoration(
-        color: AppColors.background.withValues(alpha: 0.85),
-        border: const Border(
-          bottom: BorderSide(color: AppColors.surfaceLight, width: 0.6),
-        ),
-      ),
-      child: Center(
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+        child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+            color: AppColors.background.withValues(alpha: 0.55),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.white.withValues(alpha: 0.08),
+                width: 0.8,
+              ),
+            ),
+          ),
+          child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
           child: Padding(
@@ -63,7 +71,9 @@ class TopNavBar extends StatelessWidget {
           ),
         ),
       ),
-    );
+          ),
+        ),
+      );
   }
 }
 
@@ -75,16 +85,12 @@ class _Logo extends StatelessWidget {
       height: 42,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.accent, width: 1.5),
+        border: Border.all(color: AppColors.accent.withValues(alpha: 0.7), width: 1.5),
       ),
       alignment: Alignment.center,
-      child: Text(
+      child: GradientText(
         'K',
-        style: TextStyle(
-          color: AppColors.accent,
-          fontWeight: FontWeight.w800,
-          fontSize: 20,
-        ),
+        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
       ),
     );
   }

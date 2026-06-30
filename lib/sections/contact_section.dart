@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/portfolio_data.dart';
 import '../theme/app_theme.dart';
 import '../widgets/link_utils.dart';
+import '../widgets/gradient_text.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -14,13 +15,10 @@ class ContactSection extends StatelessWidget {
         children: [
           Text('05. What’s Next?', style: AppTheme.mono(size: 15)),
           const SizedBox(height: 18),
-          const Text(
+          GradientText(
             'Get In Touch',
-            style: TextStyle(
-              fontSize: 44,
-              fontWeight: FontWeight.w800,
-              color: AppColors.heading,
-            ),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 50, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 20),
           ConstrainedBox(

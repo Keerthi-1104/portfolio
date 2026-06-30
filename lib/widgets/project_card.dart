@@ -3,7 +3,7 @@ import '../data/portfolio_data.dart';
 import '../theme/app_theme.dart';
 import 'link_utils.dart';
 
-/// A hover-elevating card for a single project.
+/// A glassmorphic, hover-elevating card for a single project.
 class ProjectCard extends StatefulWidget {
   const ProjectCard({super.key, required this.project});
 
@@ -24,32 +24,41 @@ class _ProjectCardState extends State<ProjectCard> {
       onExit: (_) => setState(() => _hovered = false),
       cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        transform: Matrix4.translationValues(0, _hovered ? -6 : 0, 0),
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        transform: Matrix4.translationValues(0, _hovered ? -8 : 0, 0),
         padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: _hovered ? AppColors.accent : AppColors.surfaceLight,
-          ),
-          boxShadow: _hovered
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.35),
-                    blurRadius: 20,
-                    offset: const Offset(0, 12),
-                  ),
-                ]
-              : null,
-        ),
+        decoration: AppDecorations.glass(hovered: _hovered),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                const Icon(Icons.folder_open, color: AppColors.accent, size: 32),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.accent.withValues(alpha: 0.18),
+                        AppColors.violet.withValues(alpha: 0.18),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.folder_open, color: AppColors.accent, size: 24),
+                ),
                 const Spacer(),
+                if (p.featured)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.violet.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.violet.withValues(alpha: 0.35)),
+                    ),
+                    child: Text('Featured',
+                        style: AppTheme.mono(size: 10, color: AppColors.violet)),
+                  ),
                 if (p.link != null && p.link!.isNotEmpty)
                   IconButton(
                     tooltip: 'Open project',
@@ -60,7 +69,7 @@ class _ProjectCardState extends State<ProjectCard> {
                   ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
             Text(
               p.name,
               style: TextStyle(
@@ -85,7 +94,8 @@ class _ProjectCardState extends State<ProjectCard> {
               spacing: 10,
               runSpacing: 8,
               children: p.tech
-                  .map((t) => Text(t, style: AppTheme.mono(size: 11, color: AppColors.textSecondary)))
+                  .map((t) => Text(t,
+                      style: AppTheme.mono(size: 11, color: AppColors.textSecondary)))
                   .toList(),
             ),
           ],

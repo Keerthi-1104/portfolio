@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/portfolio_data.dart';
 import '../theme/app_theme.dart';
 import '../widgets/section_header.dart';
+import '../widgets/gradient_text.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -74,21 +75,35 @@ class _AvatarCard extends StatelessWidget {
       aspectRatio: 1,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.accent),
+          borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [AppColors.surface, AppColors.surfaceLight],
+            colors: [AppColors.accent, AppColors.blue, AppColors.violet],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.violet.withValues(alpha: 0.35),
+              blurRadius: 40,
+              spreadRadius: -8,
+              offset: const Offset(0, 18),
+            ),
+          ],
         ),
-        alignment: Alignment.center,
-        child: Text(
-          'K',
-          style: TextStyle(
-            fontSize: 96,
-            fontWeight: FontWeight.w800,
-            color: AppColors.accent.withValues(alpha: 0.85),
+        padding: const EdgeInsets.all(2),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [AppColors.surface, AppColors.background],
+            ),
+          ),
+          alignment: Alignment.center,
+          child: GradientText(
+            'K',
+            style: const TextStyle(fontSize: 110, fontWeight: FontWeight.w800),
           ),
         ),
       ),

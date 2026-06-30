@@ -10,6 +10,8 @@ import 'sections/experience_section.dart';
 import 'sections/contact_section.dart';
 import 'widgets/nav_bar.dart';
 import 'widgets/link_utils.dart';
+import 'widgets/animated_background.dart';
+import 'widgets/reveal.dart';
 
 void main() => runApp(const PortfolioApp());
 
@@ -72,41 +74,62 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       endDrawer: _MobileMenu(items: navItems),
-      body: Column(
+      body: Stack(
         children: [
-          Builder(
-            builder: (context) => TopNavBar(
-              items: navItems,
-              onMenu: () => Scaffold.of(context).openEndDrawer(),
-            ),
-          ),
-          Expanded(
-            child: Scrollbar(
-              controller: _scrollController,
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1100),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          HeroSection(onViewWork: () => _scrollTo(_projectsKey)),
-                          KeyedSubtree(key: _aboutKey, child: const AboutSection()),
-                          KeyedSubtree(key: _skillsKey, child: const SkillsSection()),
-                          KeyedSubtree(key: _projectsKey, child: const ProjectsSection()),
-                          KeyedSubtree(key: _experienceKey, child: const ExperienceSection()),
-                          KeyedSubtree(key: _contactKey, child: const ContactSection()),
-                        ],
+          const Positioned.fill(child: AnimatedBackground()),
+          Column(
+            children: [
+              Builder(
+                builder: (context) => TopNavBar(
+                  items: navItems,
+                  onMenu: () => Scaffold.of(context).openEndDrawer(),
+                ),
+              ),
+              Expanded(
+                child: Scrollbar(
+                  controller: _scrollController,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1100),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              HeroSection(onViewWork: () => _scrollTo(_projectsKey)),
+                              KeyedSubtree(
+                                key: _aboutKey,
+                                child: const Reveal(child: AboutSection()),
+                              ),
+                              KeyedSubtree(
+                                key: _skillsKey,
+                                child: const Reveal(child: SkillsSection()),
+                              ),
+                              KeyedSubtree(
+                                key: _projectsKey,
+                                child: const Reveal(child: ProjectsSection()),
+                              ),
+                              KeyedSubtree(
+                                key: _experienceKey,
+                                child: const Reveal(child: ExperienceSection()),
+                              ),
+                              KeyedSubtree(
+                                key: _contactKey,
+                                child: const Reveal(child: ContactSection()),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
