@@ -1,0 +1,6 @@
+cd ~/Documents/Keerthana/Flutter/SmartConsumer/portfolio
+flutter build web --release --base-href /portfolio/
+git worktree add -B gh-pages /tmp/portfolio-ghpages
+rm -rf /tmp/portfolio-ghpages/* && cp -R build/web/. /tmp/portfolio-ghpages/ && touch /tmp/portfolio-ghpages/.nojekyll
+(cd /tmp/portfolio-ghpages && git add -A && git commit -m "Redeploy" && git push)
+git worktree remove /tmp/portfolio-ghpages
